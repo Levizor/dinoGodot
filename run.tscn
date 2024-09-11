@@ -1,0 +1,121 @@
+[gd_scene load_steps=11 format=3 uid="uid://bjeltbd8n88hl"]
+
+[ext_resource type="Script" path="res://run.gd" id="1_3jdcf"]
+[ext_resource type="PackedScene" uid="uid://bto4o4bb3exse" path="res://bg.tscn" id="1_na6pp"]
+[ext_resource type="PackedScene" uid="uid://bttqs8nnnsb0u" path="res://dino.tscn" id="2_oyy2w"]
+[ext_resource type="FontFile" uid="uid://dladn4c7u1asi" path="res://assets/ARCADECLASSIC.TTF" id="4_23rux"]
+[ext_resource type="Script" path="res://h_box_container.gd" id="5_02ljs"]
+[ext_resource type="PackedScene" uid="uid://cdx1yi6urvige" path="res://game_over.tscn" id="5_acvnh"]
+[ext_resource type="Script" path="res://game_over.gd" id="6_mpp2f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5r4jy"]
+size = Vector2(231, 9.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_17a4v"]
+size = Vector2(709, 112.5)
+
+[sub_resource type="LabelSettings" id="LabelSettings_n82pq"]
+font = ExtResource("4_23rux")
+font_size = 75
+font_color = Color(1, 1, 0.0509804, 1)
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Run" type="Node2D"]
+script = ExtResource("1_3jdcf")
+
+[node name="BG" parent="." instance=ExtResource("1_na6pp")]
+scale = Vector2(1.10685, 1.10685)
+metadata/_edit_lock_ = true
+
+[node name="Dino" parent="." instance=ExtResource("2_oyy2w")]
+position = Vector2(175, 476)
+scale = Vector2(0.639999, 0.639999)
+metadata/_edit_lock_ = true
+
+[node name="Timers" type="Node2D" parent="."]
+
+[node name="Obstacle Timer" type="Timer" parent="Timers"]
+wait_time = 0.997
+autostart = true
+
+[node name="ScoreUpdater" type="Timer" parent="Timers"]
+wait_time = 0.221
+autostart = true
+
+[node name="AccelerationTimer" type="Timer" parent="Timers"]
+wait_time = 4.141
+autostart = true
+
+[node name="Obstacles" type="Node2D" parent="."]
+
+[node name="Ground" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+position = Vector2(185, 574)
+shape = SubResource("RectangleShape2D_5r4jy")
+
+[node name="ObstacleDestroyer" type="Area2D" parent="."]
+position = Vector2(-500, 500)
+rotation = 1.5708
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ObstacleDestroyer"]
+position = Vector2(-134, 9)
+shape = SubResource("RectangleShape2D_17a4v")
+
+[node name="Scores" type="CanvasLayer" parent="."]
+process_mode = 2
+
+[node name="B" type="HBoxContainer" parent="Scores"]
+layout_direction = 2
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -254.0
+offset_right = 254.0
+offset_bottom = 76.0
+grow_horizontal = 2
+size_flags_horizontal = 0
+alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Scores/B" groups=["scores"]]
+layout_mode = 2
+size_flags_horizontal = 6
+script = ExtResource("5_02ljs")
+
+[node name="HI" type="Label" parent="Scores/B/HBoxContainer"]
+layout_mode = 2
+text = "hi "
+label_settings = SubResource("LabelSettings_n82pq")
+horizontal_alignment = 2
+uppercase = true
+
+[node name="HighScore" type="Label" parent="Scores/B/HBoxContainer"]
+layout_mode = 2
+text = "0"
+label_settings = SubResource("LabelSettings_n82pq")
+horizontal_alignment = 2
+uppercase = true
+
+[node name="Score" type="Label" parent="Scores"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -41.0
+offset_bottom = 76.0
+grow_horizontal = 0
+text = "0"
+label_settings = SubResource("LabelSettings_n82pq")
+horizontal_alignment = 2
+uppercase = true
+
+[node name="GameOver" parent="Scores" instance=ExtResource("5_acvnh")]
+visible = false
+script = ExtResource("6_mpp2f")
+
+[connection signal="timeout" from="Timers/Obstacle Timer" to="." method="_on_obstacle_timer_timeout"]
+[connection signal="timeout" from="Timers/ScoreUpdater" to="." method="_on_score_updater_timeout"]
+[connection signal="timeout" from="Timers/AccelerationTimer" to="." method="_on_acceleration_timer_timeout"]
+[connection signal="child_entered_tree" from="Obstacles" to="." method="_on_obstacles_child_entered_tree"]
+[connection signal="area_entered" from="ObstacleDestroyer" to="." method="_on_obstacle_destroyer_area_entered"]
+[connection signal="visibility_changed" from="Scores/GameOver" to="Scores/GameOver" method="_on_visibility_changed"]

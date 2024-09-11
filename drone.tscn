@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://32l4secat42p"]
+
+[ext_resource type="Script" path="res://drone.gd" id="1_aigsc"]
+[ext_resource type="Texture2D" uid="uid://cix1a0b4uj238" path="res://assets/obstacles/boom.png" id="1_r4dl0"]
+[ext_resource type="Texture2D" uid="uid://t4xt6qsadtf6" path="res://assets/obstacles/drone1.png" id="2_r3ts3"]
+[ext_resource type="Texture2D" uid="uid://de5r45sjya2gh" path="res://assets/obstacles/drone2.png" id="3_lmtcq"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lxysn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_r4dl0")
+}],
+"loop": true,
+"name": &"boom",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_r3ts3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_lmtcq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Drone" type="Area2D"]
+scale = Vector2(2, 2)
+script = ExtResource("1_aigsc")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_lxysn")
+
+[node name="Col" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(2, 22, -11, 2, -14, -13, -37, -14, -36, -24, 37, -23, 37, -12, 12, -10)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

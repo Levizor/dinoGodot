@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://diasvsq6xyo2r"]
+
+[ext_resource type="Texture2D" uid="uid://b656h7tvjxdpf" path="res://assets/obstacles/pit.png" id="1_a5cte"]
+[ext_resource type="Script" path="res://pit.gd" id="1_mrij1"]
+
+[node name="Pit" type="Area2D"]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_mrij1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_a5cte")
+
+[node name="Col" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-111, 97, -253, 63, -233, -74, -125, -91, 256, -61, 251, 62, 145, 97)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

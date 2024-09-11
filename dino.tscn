@@ -1,0 +1,59 @@
+[gd_scene load_steps=11 format=3 uid="uid://bttqs8nnnsb0u"]
+
+[ext_resource type="Texture2D" uid="uid://kkxcka5n2tl7" path="res://assets/dino/1.png" id="1_ir5es"]
+[ext_resource type="Script" path="res://dino.gd" id="1_xys00"]
+[ext_resource type="Texture2D" uid="uid://buk6xvlxjl6k5" path="res://assets/dino/over.png" id="2_jpdns"]
+[ext_resource type="Texture2D" uid="uid://btphtag7swood" path="res://assets/dino/2.png" id="2_wtpu0"]
+[ext_resource type="Texture2D" uid="uid://cwv01om4vwqc2" path="res://assets/dino/3.png" id="3_e5wuc"]
+[ext_resource type="Texture2D" uid="uid://dqg05u4k3ck42" path="res://assets/dino/4.png" id="4_f41ri"]
+[ext_resource type="Texture2D" uid="uid://dykb74apmup12" path="res://assets/dino/5.png" id="5_tbym6"]
+[ext_resource type="Script" path="res://animated_sprite_2d.gd" id="7_osspw"]
+[ext_resource type="AudioStream" uid="uid://bc3i40w2hl3nx" path="res://assets/jump.wav" id="8_58f80"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7aq2p"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_jpdns")
+}],
+"loop": true,
+"name": &"over",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ir5es")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_wtpu0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_e5wuc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_f41ri")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_tbym6")
+}],
+"loop": true,
+"name": &"run",
+"speed": 7.0
+}]
+
+[node name="Dino" type="CharacterBody2D"]
+script = ExtResource("1_xys00")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_7aq2p")
+animation = &"run"
+autoplay = "run"
+script = ExtResource("7_osspw")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-52, 140, -58, 125, -46, 106, -66, 56, -88, 10, -98, 4, -97, -31, -73, -29, -6, -80, 67, -144, 129, -137, 172, -86, 205, -66, 193, -42, 107, -75, 70, -57, 148, -19, 141, 2, 115, 44, 103, 44, 25, -11, 39, 83, 54, 116, 106, 128, 105, 144)
+
+[node name="JumpSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_58f80")
+volume_db = -17.969
+pitch_scale = 0.96

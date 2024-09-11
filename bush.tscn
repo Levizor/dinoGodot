@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxpt44xwpa2q5"]
+
+[ext_resource type="Texture2D" uid="uid://pqa7x5lkga6k" path="res://assets/obstacles/bushInPot.png" id="1_1styv"]
+[ext_resource type="Script" path="res://bush.gd" id="1_nfm5p"]
+
+[node name="Bush" type="Area2D"]
+scale = Vector2(0.7, 0.7)
+script = ExtResource("1_nfm5p")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_1styv")
+
+[node name="Col" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-14, 122, -15, 90, -49, 89, -62, -64, -16, -124, 32, -122, 58, -11, 50, 93, 20, 88, 19, 122)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

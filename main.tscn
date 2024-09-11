@@ -1,0 +1,60 @@
+[gd_scene load_steps=5 format=3 uid="uid://6f7o1hc7onw5"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_qs3e2"]
+[ext_resource type="PackedScene" uid="uid://bto4o4bb3exse" path="res://bg.tscn" id="1_wghhj"]
+[ext_resource type="PackedScene" uid="uid://bttqs8nnnsb0u" path="res://dino.tscn" id="2_3k7wv"]
+[ext_resource type="FontFile" uid="uid://dladn4c7u1asi" path="res://assets/ARCADECLASSIC.TTF" id="4_r4gx2"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_qs3e2")
+
+[node name="BG" parent="." instance=ExtResource("1_wghhj")]
+process_mode = 4
+scale = Vector2(1.10685, 1.10685)
+metadata/_edit_lock_ = true
+
+[node name="Dino" parent="." instance=ExtResource("2_3k7wv")]
+process_mode = 4
+position = Vector2(175, 476)
+scale = Vector2(0.639999, 0.639999)
+script = null
+metadata/_edit_lock_ = true
+
+[node name="Control" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="Control"]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -447.0
+offset_top = -270.0
+offset_right = -16.0
+offset_bottom = -70.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.0857885, 0.591352, 0.56772, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_r4gx2")
+theme_override_font_sizes/font_size = 196
+text = "Dino"
+
+[node name="Button" type="Button" parent="Control"]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -253.0
+offset_top = -11.0
+offset_right = -100.0
+offset_bottom = 65.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.0857885, 0.591352, 0.56772, 1)
+theme_override_fonts/font = ExtResource("4_r4gx2")
+theme_override_font_sizes/font_size = 75
+button_mask = 7
+text = "Play"
+flat = true

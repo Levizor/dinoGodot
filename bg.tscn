@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://bto4o4bb3exse"]
+
+[ext_resource type="Script" path="res://buildings.gd" id="1_5860j"]
+[ext_resource type="Texture2D" uid="uid://dg3brp1xmjitk" path="res://assets/background.png" id="1_wgovf"]
+[ext_resource type="Texture2D" uid="uid://ckyyje8fbg3y0" path="res://assets/road.png" id="2_imhth"]
+[ext_resource type="Script" path="res://road.gd" id="3_idi1m"]
+
+[node name="BG" type="Node2D"]
+
+[node name="Buildings" type="Node2D" parent="."]
+script = ExtResource("1_5860j")
+
+[node name="BuildingTexture" type="Sprite2D" parent="Buildings"]
+position = Vector2(3458, 324)
+scale = Vector2(0.720313, 0.720313)
+texture = ExtResource("1_wgovf")
+
+[node name="Road" type="Node2D" parent="."]
+position = Vector2(-0.000244141, -3.05176e-05)
+script = ExtResource("3_idi1m")
+
+[node name="RoadTexture" type="Sprite2D" parent="Road"]
+position = Vector2(3456, 324)
+scale = Vector2(0.72, 0.72)
+texture = ExtResource("2_imhth")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]

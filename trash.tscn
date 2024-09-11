@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dfaoh3lnjy0lc"]
+
+[ext_resource type="Script" path="res://trash.gd" id="1_4ttjc"]
+[ext_resource type="Texture2D" uid="uid://dchfj3276oin5" path="res://assets/obstacles/trash.png" id="1_sv5bq"]
+
+[node name="Area2D" type="Area2D"]
+scale = Vector2(0.685, 0.685)
+script = ExtResource("1_4ttjc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_sv5bq")
+
+[node name="Col" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-54.0146, -74.4526, -49.635, 96.3504, 46.7153, 97.8102, 52.5547, -74.4526)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
